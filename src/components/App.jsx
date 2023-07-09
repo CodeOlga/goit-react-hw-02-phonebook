@@ -11,7 +11,7 @@ class App extends Component {
   
   // model.id = nanoid() //=> "V1StGXR8_Z5jdHi6B-myT"
 
-  handleChange = e => {
+  handleNameChange = e => {
     this.setState({name: e.target.value})
     // console.log(e.currentTarget.value)
     //единый обработчик полей
