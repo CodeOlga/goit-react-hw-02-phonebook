@@ -1,32 +1,34 @@
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
-
 // import PropTypes from 'prop-types';
+
 class ContactForm extends Component {
   state = {
     name: '',
     number: ''
   }
-    handleNameChange = e => {
 
-    this.setState({ ...this.state, name: e.target.value})
-    // console.log(e.currentTarget.value)
-    //единый обработчик полей
-    //const { name, value } e.target;
-    //  this.setState({[name]: value})
-      // console.log(e.target.name)
+  //   handleNameChange = e => {
+  //   this.setState({ ...this.state, name: e.target.value})
+  // }
+
+  // handleNumberChange = e => {
+  //     this.setState({ ...this.state, number: e.target.value})
+  // }
+
+handleChange = e => {
+    const { name, value } = e.target;
+    this.setState({[name]: value})
   }
 
-  handleNumberChange = e => {
-      this.setState({ ...this.state, number: e.target.value})
-  }
 
-   handleNameSubmit = e => {
+  handleSubmit = e => {
     e.preventDefault()
     const { contacts, name, number } = this.state;
     // console.log(this.state)
     this.setState({contacts: [...contacts, {name: name, number: number, id: nanoid()}]})
-    //  this.props.onSubmit(this.state)
+    // this.props.onSubmit(this.state)
+    // this.props.onSubmit({name, number})
  
     this.reset();
   }
@@ -40,12 +42,12 @@ class ContactForm extends Component {
        const { name, number} = this.state;
     return (
 
-<form onSubmit={this.handleNameSubmit}>
+<form onSubmit={this.handleSubmit}>
           <label>
             Name
             <input
               value={name}
-              onChange={this.handleNameChange}
+              onChange={this.handleChange}
               type="text"
               name="name"
               pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -58,7 +60,7 @@ class ContactForm extends Component {
             Number
             <input
               value={number}
-              onChange={this.handleNumberChange}
+              onChange={this.handleChange}
               type="tel"
               name="number"
               pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -72,35 +74,4 @@ class ContactForm extends Component {
   }
 }
 export default ContactForm;
-// const ContactForm = ({ }) => (
-//    <form onSubmit={this.handleNameSubmit}>
-//           <label>
-//             Name
-//             <input
-//               value={name}
-//               onChange={this.handleNameChange}
-//               type="text"
-//               name="name"
-//               pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-//               title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-//               required
-//             />
-//           </label>
 
-//           <label>
-//             Number
-//             <input
-//               value={number}
-//               onChange={this.handleNumberChange}
-//               type="tel"
-//               name="number"
-//               pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-//               title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-//               required
-//             />
-//           </label>
-//           <button type='submit' >Add contact</button>
-//         </form>
-// )
-
-// export default ContactForm;

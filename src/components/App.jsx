@@ -67,14 +67,7 @@ class App extends Component {
       const visibleContacts = contacts.filter(contact =>
     contact.name.toLowerCase().includes(normalizedFilter))
     return (
-//       <div>
-//   <h1>Phonebook</h1>
-//   <ContactForm ... />
 
-//   <h2>Contacts</h2>
-//   <Filter ... />
-//   <ContactList ... />
-// </div>
       <div>
         <h1>Phonebook</h1>
         <ContactForm onSubmit={this.formSubmitHandler} />
