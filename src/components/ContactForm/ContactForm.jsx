@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
+import css from './ContactForm.module.css'
 
 class ContactForm extends Component {
   state = {
@@ -39,7 +40,7 @@ handleChange = e => {
       }
     
     this.props.onFormSubmit({ name, number });
-};
+  };
 
   //очистити форму
   reset = () => {
@@ -50,33 +51,35 @@ handleChange = e => {
       const { name, number} = this.state;
       return (
 
-<form onSubmit={this.handleSubmit}>
-          <label>
+        <form className={css.formContainer} onSubmit={this.handleSubmit}>
+          <label className={css.formLabel}>
             Name
             <input
+              className={css.formInput}
               value={name}
               onChange={this.handleChange}
               type="text"
               name="name"
-              pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+              pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
               title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
               required
             />
           </label>
 
-          <label>
+          <label className={css.formLabel}>
             Number
             <input
+              className={css.formInput}
               value={number}
               onChange={this.handleChange}
               type="tel"
               name="number"
-              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+              pattern="\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}"
               title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
               required
             />
           </label>
-          <button type='submit' >Add contact</button>
+          <button className={css.formButton} type='submit' >Add contact</button>
         </form>
     )
   }
@@ -84,8 +87,8 @@ handleChange = e => {
 
 ContactForm.propTypes = {
   onFormSubmit: PropTypes.func.isRequired,
-    contacts: PropTypes.arrayOf(PropTypes.string.isRequired),
-
+  contacts: PropTypes.arrayOf(PropTypes.objectOf(
+    PropTypes.string.isRequired))
 }
 
 export default ContactForm;
