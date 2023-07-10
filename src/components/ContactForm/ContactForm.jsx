@@ -1,17 +1,15 @@
 import { Component } from 'react';
-import { nanoid } from 'nanoid';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 class ContactForm extends Component {
   state = {
     name: '',
     number: ''
   }
-
+//якщо handleChange розбити на два різні обробника
   //   handleNameChange = e => {
   //   this.setState({ ...this.state, name: e.target.value})
   // }
-
   // handleNumberChange = e => {
   //     this.setState({ ...this.state, number: e.target.value})
   // }
@@ -21,26 +19,36 @@ handleChange = e => {
     this.setState({[name]: value})
   }
 
+//коли все було в одному App.jsx
+  // handleSubmit = e => {
+  //   e.preventDefault()
+  //   // const { contacts, name, number } = this.state;
+  //   // this.setState({contacts: [...contacts, {name: name, number: number, id: nanoid()}]});
+  //   this.reset();
+  // }
 
   handleSubmit = e => {
-    e.preventDefault()
-    const { contacts, name, number } = this.state;
-    // console.log(this.state)
-    this.setState({contacts: [...contacts, {name: name, number: number, id: nanoid()}]})
-    // this.props.onSubmit(this.state)
-    // this.props.onSubmit({name, number})
- 
+    e.preventDefault();
+    const { name, number } = this.state;
     this.reset();
-  }
 
-  //очистить форму
+    const isNameExist = this.props.contacts.some(contact => contact.name.toLowerCase() === name.toLowerCase());
+      if (isNameExist) {
+        alert(`${name} is already in contacts.`);
+        return
+      }
+    
+    this.props.onFormSubmit({ name, number });
+};
+
+  //очистити форму
   reset = () => {
     this.setState({name: '', number: ''})
   }
 
   render() {
-       const { name, number} = this.state;
-    return (
+      const { name, number} = this.state;
+      return (
 
 <form onSubmit={this.handleSubmit}>
           <label>
@@ -73,5 +81,12 @@ handleChange = e => {
     )
   }
 }
+
+ContactForm.propTypes = {
+  onFormSubmit: PropTypes.func.isRequired,
+    contacts: PropTypes.arrayOf(PropTypes.string.isRequired),
+
+}
+
 export default ContactForm;
 
