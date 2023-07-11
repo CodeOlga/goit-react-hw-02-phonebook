@@ -11,7 +11,7 @@ const Filter = ({ value, onChange }) => (
         type="text"
         name="filter"
       />
-    </label>
+  </label>
 )
 
 Filter.propTypes = {

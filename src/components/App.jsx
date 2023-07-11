@@ -25,6 +25,7 @@ class App extends Component {
     this.setState(prevState => ({
       contacts: prevState.contacts.filter(contact => contact.id !== contactId)
     }))
+    this.setState({filter: ''})
   }
 
   formSubmitHandler = data => {
@@ -44,7 +45,7 @@ class App extends Component {
         <h1 className={css.headers}>Phonebook</h1>
         <ContactForm onFormSubmit={this.formSubmitHandler} contacts={contacts } />
         <h2 className={css.headers}>Contacts</h2>
-        <Filter value={filter} onChange={this.changeFilter}/>
+        <Filter value={filter} onChange={this.changeFilter} />
         <ContactList contacts={visibleContacts} onDeleteContact={this.deleteContact} />
     </div>
     );
