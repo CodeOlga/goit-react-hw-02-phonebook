@@ -7,26 +7,12 @@ class ContactForm extends Component {
     name: '',
     number: ''
   }
-//якщо handleChange розбити на два різні обробника
-  //   handleNameChange = e => {
-  //   this.setState({ ...this.state, name: e.target.value})
-  // }
-  // handleNumberChange = e => {
-  //     this.setState({ ...this.state, number: e.target.value})
-  // }
 
 handleChange = e => {
     const { name, value } = e.target;
     this.setState({[name]: value})
   }
 
-//коли все було в одному App.jsx
-  // handleSubmit = e => {
-  //   e.preventDefault()
-  //   // const { contacts, name, number } = this.state;
-  //   // this.setState({contacts: [...contacts, {name: name, number: number, id: nanoid()}]});
-  //   this.reset();
-  // }
 
   handleSubmit = e => {
     e.preventDefault();
@@ -42,7 +28,7 @@ handleChange = e => {
     this.props.onFormSubmit({ name, number });
   };
 
-  //очистити форму
+  //to clear form
   reset = () => {
     this.setState({name: '', number: ''})
   }
